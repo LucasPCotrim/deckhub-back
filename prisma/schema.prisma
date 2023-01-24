@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cards {
+  id            Int          @id @default(autoincrement())
+  scryfallId    String
+  oracleID      String
+  name          String
+  typeLine      String
+  oracleText    String
+  manaCost      String
+  cmc           Int
+  colors        String
+  colorIdentity String
+  releasedAt    DateTime     @db.Date
+  scryfallUri   String
+  gathererUri   String
+  imageUri      String
+  imageArtCrop  String
+  price         Int
+  setId         Int
+  sets          sets         @relation(fields: [setId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  cardsDecks    cardsDecks[]
+}
+
+model cardsDecks {
+  id     Int   @id @default(autoincrement())
+  cardId Int
+  deckId Int
+  amount Int
+  cards  cards @relation(fields: [cardId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  decks  decks @relation(fields: [deckId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model decks {
+  id         Int          @id @default(autoincrement())
+  name       String
+  formatId   Int
+  userId     Int
+  createdAt  DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime     @default(now()) @db.Timestamp(6)
+  cardsDecks cardsDecks[]
+  formats    formats      @relation(fields: [formatId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "decks_format_id_fkey")
+  users      users        @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "decks_user_id_fkey")
+}
+
+model formats {
+  id    Int     @id @default(autoincrement())
+  name  String
+  decks decks[]
+}
+
+model sessions {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sessions_user_id_fkey")
+}
+
+model sets {
+  id          Int      @id @default(autoincrement())
+  name        String
+  scryfallId  String
+  scryfallUri String
+  iconSvgUri  String
+  setType     String
+  code        String
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  cards       cards[]
+}
+
+model users {
+  id         Int        @id @default(autoincrement())
+  name       String
+  email      String     @unique
+  password   String
+  profilePic String
+  createdAt  DateTime   @default(now()) @db.Timestamp(6)
+  decks      decks[]
+  sessions   sessions[]
+}
