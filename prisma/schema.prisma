@@ -58,7 +58,7 @@ model formats {
 
 model sessions {
   id        Int      @id @default(autoincrement())
-  userId    Int
+  userId    Int      @unique
   token     String   @unique
   createdAt DateTime @default(now()) @db.Timestamp(6)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sessions_user_id_fkey")
