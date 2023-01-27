@@ -5,6 +5,6 @@ import { signUp } from '@/controllers/authenticationController';
 
 const authenticationRouter = Router();
 
-authenticationRouter.post('/sign-in', validateBody(signupSchema), signUp);
+authenticationRouter.post('/sign-up', validateBody(signupSchema), signUp);
 
 export { authenticationRouter };
