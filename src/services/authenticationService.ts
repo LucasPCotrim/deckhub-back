@@ -26,7 +26,7 @@ async function login({ email, password }: LoginParams): Promise<sessions> {
 
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
-  const session = await sessionRepository.create({ userId: user.id, token });
+  const session = await sessionRepository.upsert({ userId: user.id, token });
   return session;
 }
 
