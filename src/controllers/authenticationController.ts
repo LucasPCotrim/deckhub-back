@@ -23,9 +23,9 @@ export async function login(req: Request, res: Response) {
   const { email, password } = req.body;
 
   try {
-    const session = await authenticationService.login({ email, password });
+    const userSessionInfo = await authenticationService.login({ email, password });
     return res.status(httpStatus.CREATED).send({
-      session: session,
+      user: userSessionInfo,
     });
   } catch (error) {
     if (error.name === 'userNotFoundError') return res.status(httpStatus.NOT_FOUND).send(error);
