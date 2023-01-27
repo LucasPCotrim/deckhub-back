@@ -1,8 +1,10 @@
-import { SignupParams } from '@/protocols';
-import { users } from '@prisma/client';
+import { SignupParams, LoginParams } from '@/protocols';
+import { sessions, users } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { userRepository } from '@/repositories';
-import { duplicateEmailError } from '@/errors';
+import { duplicateEmailError, userNotFoundError, invalidCredentialsError } from '@/errors';
+import { sessionRepository } from '@/repositories/sessionRepository';
+import jwt from 'jsonwebtoken';
 
 const defaultProfilePic =
   'https://cards.scryfall.io/art_crop/front/4/9/496849a5-4b24-4eae-8bfb-d46f645d85ea.jpg?1664930445';
@@ -15,13 +17,32 @@ async function signUp({ name, email, password }: SignupParams): Promise<users> {
   return user;
 }
 
+async function login({ email, password }: LoginParams): Promise<sessions> {
+  const user = await userRepository.findByEmail(email);
+
+  if (!user) throw userNotFoundError();
+
+  await validatePassword(password, user.password);
+
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+  const session = await sessionRepository.create({ userId: user.id, token });
+  return session;
+}
+
 async function validateUniqueEmail(email: string) {
   const userWithSameEmail = await userRepository.findByEmail(email);
   if (userWithSameEmail) throw duplicateEmailError();
 }
 
+async function validatePassword(givenPassword: string, userPassword: string) {
+  const isPasswordValid = await bcrypt.compare(givenPassword, userPassword);
+  if (!isPasswordValid) throw invalidCredentialsError();
+}
+
 const authenticationService = {
   signUp,
+  login,
 };
 
 export { authenticationService };

@@ -14,7 +14,22 @@ export async function signUp(req: Request, res: Response) {
       profilePic: user.profilePic,
     });
   } catch (error) {
-    if (error.name === 'DuplicatedEmailError') return res.status(httpStatus.CONFLICT).send(error);
+    if (error.name === 'duplicateEmailError') return res.status(httpStatus.CONFLICT).send(error);
+    return res.status(httpStatus.BAD_REQUEST).send(error);
+  }
+}
+
+export async function login(req: Request, res: Response) {
+  const { email, password } = req.body;
+
+  try {
+    const session = await authenticationService.login({ email, password });
+    return res.status(httpStatus.CREATED).send({
+      session: session,
+    });
+  } catch (error) {
+    if (error.name === 'userNotFoundError') return res.status(httpStatus.NOT_FOUND).send(error);
+    if (error.name === 'invalidCredentialsError') return res.status(httpStatus.UNAUTHORIZED).send(error);
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
 }
