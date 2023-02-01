@@ -10,7 +10,7 @@ datasource db {
 model cards {
   id            Int          @id @default(autoincrement())
   scryfallId    String
-  oracleID      String
+  oracleId      String
   name          String
   typeLine      String
   oracleText    String
