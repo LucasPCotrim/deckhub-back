@@ -1,7 +1,8 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { users } from '@prisma/client';
-const cardsDataset = require('./cards.json');
+const cardsDataset1 = require('./cards1.json');
+const cardsDataset2 = require('./cards2.json');
 const setsDataset = require('./sets.json');
 
 const prisma = new PrismaClient();
@@ -40,7 +41,7 @@ async function createSets(): Promise<void> {
 
 async function createCards(): Promise<void> {
   let count = 0;
-  for (const card of cardsDataset) {
+  for (const card of cardsDataset1.concat(cardsDataset2)) {
     if (card.layout === 'art_series') continue;
     if (card.games.indexOf('paper') < 0) continue;
     if (!card.prices.usd) card.prices.usd = 0;
@@ -79,8 +80,8 @@ async function createCards(): Promise<void> {
 
 async function main() {
   await prisma.users.deleteMany({});
-  await prisma.sets.deleteMany({});
   await prisma.cards.deleteMany({});
+  await prisma.sets.deleteMany({});
 
   const user = await createUser();
   await createSets();
