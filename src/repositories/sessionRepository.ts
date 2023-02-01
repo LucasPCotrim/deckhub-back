@@ -30,6 +30,14 @@ async function findByToken(token: string) {
   });
 }
 
-const sessionRepository = { create, upsert, findByToken };
+async function deleteByUserId(userId: number) {
+  return prisma.sessions.deleteMany({
+    where: {
+      userId,
+    },
+  });
+}
+
+const sessionRepository = { create, upsert, findByToken, deleteByUserId };
 
 export { sessionRepository };

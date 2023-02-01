@@ -38,7 +38,8 @@ export async function login(req: Request, res: Response) {
 export async function logout(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
   try {
-    // await authenticationService.logout({ email, password });
+    await authenticationService.logout({ userId });
+    return res.sendStatus(httpStatus.OK);
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }

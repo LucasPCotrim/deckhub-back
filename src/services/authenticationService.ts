@@ -31,6 +31,10 @@ async function login({ email, password }: LoginParams): Promise<userSessionInfo>
   return { token: session.token, name: user.name, email: user.email, profilePic: user.profilePic };
 }
 
+async function logout({ userId }: { userId: number }): Promise<void> {
+  await sessionRepository.deleteByUserId(userId);
+}
+
 async function validateUniqueEmail(email: string) {
   const userWithSameEmail = await userRepository.findByEmail(email);
   if (userWithSameEmail) throw duplicateEmailError();
@@ -44,6 +48,7 @@ async function validatePassword(givenPassword: string, userPassword: string) {
 const authenticationService = {
   signUp,
   login,
+  logout,
 };
 
 export { authenticationService };
