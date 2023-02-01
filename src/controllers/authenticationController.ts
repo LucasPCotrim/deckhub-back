@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { AuthenticatedRequest } from './../middlewares/authenticationMiddleware';
 import httpStatus from 'http-status';
 import { authenticationService } from '@/services/';
 
@@ -30,6 +31,15 @@ export async function login(req: Request, res: Response) {
   } catch (error) {
     if (error.name === 'userNotFoundError') return res.status(httpStatus.NOT_FOUND).send(error);
     if (error.name === 'invalidCredentialsError') return res.status(httpStatus.UNAUTHORIZED).send(error);
+    return res.status(httpStatus.BAD_REQUEST).send(error);
+  }
+}
+
+export async function logout(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+  try {
+    // await authenticationService.logout({ email, password });
+  } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
 }

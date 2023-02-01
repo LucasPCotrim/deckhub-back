@@ -22,6 +22,14 @@ async function upsert(data: Prisma.sessionsUncheckedCreateInput) {
   });
 }
 
-const sessionRepository = { create, upsert };
+async function findByToken(token: string) {
+  return prisma.sessions.findFirst({
+    where: {
+      token,
+    },
+  });
+}
+
+const sessionRepository = { create, upsert, findByToken };
 
 export { sessionRepository };
