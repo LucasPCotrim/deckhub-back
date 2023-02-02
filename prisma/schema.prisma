@@ -13,6 +13,7 @@ model cards {
   oracleId      String
   name          String
   typeLine      String
+  rarity        String
   oracleText    String
   manaCost      String
   cmc           Int

@@ -60,6 +60,7 @@ async function createCards(): Promise<void> {
       oracleId: card.oracle_id,
       name: card.name,
       typeLine: card.type_line,
+      rarity: card.rarity,
       oracleText: card.oracle_text || '',
       manaCost: card.mana_cost || '',
       cmc: card.cmc,
