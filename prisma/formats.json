@@ -1,0 +1,37 @@
+[
+  {
+    "object": "format",
+    "id": "1",
+    "name": "standard"
+  },
+  {
+    "object": "format",
+    "id": "2",
+    "name": "pioneer"
+  },
+  {
+    "object": "format",
+    "id": "3",
+    "name": "modern"
+  },
+  {
+    "object": "format",
+    "id": "4",
+    "name": "legacy"
+  },
+  {
+    "object": "format",
+    "id": "5",
+    "name": "pauper"
+  },
+  {
+    "object": "format",
+    "id": "6",
+    "name": "vintage"
+  },
+  {
+    "object": "format",
+    "id": "7",
+    "name": "commander"
+  }
+]
