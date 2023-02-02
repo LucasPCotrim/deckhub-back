@@ -44,6 +44,7 @@ model decks {
   name       String
   formatId   Int
   userId     Int
+  numVisits  Int          @default(0)
   createdAt  DateTime     @default(now()) @db.Timestamp(6)
   updatedAt  DateTime     @default(now()) @db.Timestamp(6)
   cardsDecks cardsDecks[]
