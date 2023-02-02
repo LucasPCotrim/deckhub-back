@@ -1,0 +1,78 @@
+{
+  "name": "My first deck",
+  "format": "modern",
+  "cards": [
+    {
+      "cardName": "Dragon's Rage Channeler",
+      "amount": 3
+    },
+    {
+      "cardName": "Ragavan, Nimble Pilferer",
+      "amount": 4
+    },
+    {
+      "cardName": "Pteramander",
+      "amount": 3
+    },
+    {
+      "cardName": "Mindlink Mech",
+      "amount": 1
+    },
+    {
+      "cardName": "Dazzling Sphinx",
+      "amount": 2
+    },
+    {
+      "cardName": "Consider",
+      "amount": 3
+    },
+    {
+      "cardName": "Lightning Bolt",
+      "amount": 4
+    },
+    {
+      "cardName": "Ponder",
+      "amount": 3
+    },
+    {
+      "cardName": "Chain of Plasma",
+      "amount": 4
+    },
+    {
+      "cardName": "Negate",
+      "amount": 4
+    },
+    {
+      "cardName": "Blue Elemental Blast",
+      "amount": 4
+    },
+    {
+      "cardName": "Mishra's Bauble",
+      "amount": 4
+    },
+    {
+      "cardName": "Lava Spike",
+      "amount": 2
+    },
+    {
+      "cardName": "Fiery Islet",
+      "amount": 4
+    },
+    {
+      "cardName": "Misty Rainforest",
+      "amount": 4
+    },
+    {
+      "cardName": "Lotus Vale",
+      "amount": 4
+    },
+    {
+      "cardName": "Hall of Storm Giants",
+      "amount": 4
+    },
+    {
+      "cardName": "Steam Vents",
+      "amount": 3
+    }
+  ]
+}

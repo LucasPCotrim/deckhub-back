@@ -1,10 +1,12 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { users } from '@prisma/client';
+import { faker } from '@faker-js/faker';
 const cardsDataset1 = require('./cards1.json');
 const cardsDataset2 = require('./cards2.json');
 const setsDataset = require('./sets.json');
 const formatsDataset = require('./formats.json');
+const sampleDeck = require('./sampleDeck.json');
 
 const prisma = new PrismaClient();
 
@@ -89,17 +91,54 @@ async function createFormats(): Promise<void> {
   console.log(`Added ${count} formats to database`);
 }
 
+async function createDeck(user: users): Promise<void> {
+  const format = await prisma.formats.findFirst({
+    where: {
+      name: sampleDeck.format,
+    },
+  });
+  const deck = await prisma.decks.create({
+    data: {
+      name: sampleDeck.name,
+      formatId: format.id,
+      userId: user.id,
+    },
+  });
+  let count = 0;
+  for (const cardInfo of sampleDeck.cards) {
+    console.log(cardInfo);
+    const card = await prisma.cards.findFirst({
+      where: {
+        name: cardInfo.cardName,
+      },
+    });
+    if (!card) throw new Error('Card not found!');
+    await prisma.cardsDecks.create({
+      data: {
+        cardId: card.id,
+        deckId: deck.id,
+        amount: cardInfo.amount,
+      },
+    });
+    count++;
+  }
+  console.log(`Added ${count} cards to deck: ${deck.name}`);
+}
+
 async function main() {
   await prisma.sessions.deleteMany({});
-  await prisma.users.deleteMany({});
+  await prisma.cardsDecks.deleteMany({});
   await prisma.cards.deleteMany({});
   await prisma.sets.deleteMany({});
+  await prisma.decks.deleteMany({});
+  await prisma.users.deleteMany({});
   await prisma.formats.deleteMany({});
 
   const user = await createUser();
   await createSets();
   await createCards();
   await createFormats();
+  await createDeck(user);
 }
 
 main()
