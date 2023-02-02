@@ -4,6 +4,7 @@ import { users } from '@prisma/client';
 const cardsDataset1 = require('./cards1.json');
 const cardsDataset2 = require('./cards2.json');
 const setsDataset = require('./sets.json');
+const formatsDataset = require('./formats.json');
 
 const prisma = new PrismaClient();
 
@@ -78,14 +79,26 @@ async function createCards(): Promise<void> {
   console.log(`Added ${count} cards to database`);
 }
 
+async function createFormats(): Promise<void> {
+  let count = 0;
+  for (const format of formatsDataset) {
+    await prisma.formats.create({ data: { name: format.name } });
+    count++;
+  }
+  console.log(`Added ${count} formats to database`);
+}
+
 async function main() {
+  await prisma.sessions.deleteMany({});
   await prisma.users.deleteMany({});
   await prisma.cards.deleteMany({});
   await prisma.sets.deleteMany({});
+  await prisma.formats.deleteMany({});
 
   const user = await createUser();
   await createSets();
   await createCards();
+  await createFormats();
 }
 
 main()
