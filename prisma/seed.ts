@@ -91,6 +91,11 @@ async function createFormats(): Promise<void> {
 }
 
 async function createDeck(user: users): Promise<void> {
+  const firstCard = await prisma.cards.findFirst({
+    where: {
+      name: sampleDeck.cards[0].cardName,
+    },
+  });
   const format = await prisma.formats.findFirst({
     where: {
       name: sampleDeck.format,
@@ -99,6 +104,7 @@ async function createDeck(user: users): Promise<void> {
   const deck = await prisma.decks.create({
     data: {
       name: sampleDeck.name,
+      image: firstCard.imageArtCrop,
       formatId: format.id,
       userId: user.id,
     },

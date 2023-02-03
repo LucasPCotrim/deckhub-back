@@ -10,6 +10,7 @@ async function getDecks(): Promise<deckCover[]> {
   return decks.map((deck) => ({
     id: deck.id,
     name: deck.name,
+    image: deck.image,
     numVisits: deck.numVisits,
     format: deck.formats,
     user: {
