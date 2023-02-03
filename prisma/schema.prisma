@@ -75,7 +75,6 @@ model sets {
   iconSvgUri  String
   setType     String
   code        String
-  createdAt   DateTime @default(now()) @db.Timestamp(6)
   cards       cards[]
 }
 

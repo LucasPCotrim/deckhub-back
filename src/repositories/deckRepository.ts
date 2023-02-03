@@ -19,7 +19,11 @@ async function findById(id: number) {
       users: true,
       cardsDecks: {
         include: {
-          cards: true,
+          cards: {
+            include: {
+              sets: true,
+            },
+          },
         },
       },
     },
