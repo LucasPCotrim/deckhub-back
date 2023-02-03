@@ -3,6 +3,10 @@
   "format": "modern",
   "cards": [
     {
+      "cardName": "Lightning Bolt",
+      "amount": 4
+    },
+    {
       "cardName": "Dragon's Rage Channeler",
       "amount": 3
     },
@@ -25,10 +29,6 @@
     {
       "cardName": "Consider",
       "amount": 3
-    },
-    {
-      "cardName": "Lightning Bolt",
-      "amount": 4
     },
     {
       "cardName": "Ponder",

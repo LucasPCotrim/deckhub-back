@@ -42,6 +42,7 @@ model cardsDecks {
 model decks {
   id         Int          @id @default(autoincrement())
   name       String
+  image      String
   formatId   Int
   userId     Int
   numVisits  Int          @default(0)
