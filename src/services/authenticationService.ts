@@ -1,9 +1,8 @@
 import { SignupParams, LoginParams } from '@/protocols';
 import { sessions, users } from '@prisma/client';
 import bcrypt from 'bcrypt';
-import { userRepository } from '@/repositories';
+import { userRepository, sessionRepository } from '@/repositories';
 import { duplicateEmailError, userNotFoundError, invalidCredentialsError } from '@/errors';
-import { sessionRepository } from '@/repositories/sessionRepository';
 import jwt from 'jsonwebtoken';
 
 const defaultProfilePic =
