@@ -17,8 +17,7 @@ async function createUser(): Promise<users> {
       name: 'teste',
       email: 'teste@gmail.com',
       password: hashedPassword,
-      profilePic:
-        'https://upload.wikimedia.org/wikipedia/en/thumb/5/5f/Original_Doge_meme.jpg/300px-Original_Doge_meme.jpg',
+      profilePic: 'https://cards.scryfall.io/art_crop/front/4/9/496849a5-4b24-4eae-8bfb-d46f645d85ea.jpg?1664930445',
     },
   });
   console.log({ testUser });
