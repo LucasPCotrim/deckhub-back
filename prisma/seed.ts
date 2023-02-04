@@ -70,7 +70,7 @@ async function createCards(): Promise<void> {
       releasedAt: new Date(card.released_at),
       scryfallUri: card.scryfall_uri || '',
       gathererUri: card.related_uris?.gatherer || '',
-      imageUri: card.image_uris?.normal || '',
+      imageUri: card.image_uris?.border_crop || '',
       imageArtCrop: card.image_uris?.art_crop || '',
       price: Math.round(Number(100 * parseFloat(card.prices.usd))),
       sets: { connect: { id: cardSet.id } },
