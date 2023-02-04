@@ -1,0 +1,390 @@
+{
+  "name": "Go-Shintai of Life's Origin",
+  "format": "commander",
+  "cards": [
+    {
+      "cardName": "Go-Shintai of Life's Origin",
+      "amount": 1
+    },
+    {
+      "cardName": "Academy Rector",
+      "amount": 1
+    },
+    {
+      "cardName": "Anguished Unmaking",
+      "amount": 1
+    },
+    {
+      "cardName": "Anointed Procession",
+      "amount": 1
+    },
+    {
+      "cardName": "Arcane Adaptation",
+      "amount": 1
+    },
+    {
+      "cardName": "Arcane Signet",
+      "amount": 1
+    },
+    {
+      "cardName": "Aura of Silence",
+      "amount": 1
+    },
+    {
+      "cardName": "Aura Shards",
+      "amount": 1
+    },
+    {
+      "cardName": "Banishing Light",
+      "amount": 1
+    },
+    {
+      "cardName": "Bayou",
+      "amount": 1
+    },
+    {
+      "cardName": "Botanical Plaza",
+      "amount": 1
+    },
+    {
+      "cardName": "Breeding Pool",
+      "amount": 1
+    },
+    {
+      "cardName": "Burgeoning",
+      "amount": 1
+    },
+    {
+      "cardName": "Chromatic Lantern",
+      "amount": 1
+    },
+    {
+      "cardName": "Collective Restraint",
+      "amount": 1
+    },
+    {
+      "cardName": "Command Tower",
+      "amount": 1
+    },
+    {
+      "cardName": "Courser of Kruphix",
+      "amount": 1
+    },
+    {
+      "cardName": "Cryptolith Rite",
+      "amount": 1
+    },
+    {
+      "cardName": "Cultivate",
+      "amount": 1
+    },
+    {
+      "cardName": "Cyclonic Rift",
+      "amount": 1
+    },
+    {
+      "cardName": "Darksteel Mutation",
+      "amount": 1
+    },
+    {
+      "cardName": "Destiny Spinner",
+      "amount": 1
+    },
+    {
+      "cardName": "Dryad of the Ilysian Grove",
+      "amount": 1
+    },
+    {
+      "cardName": "Enchantress's Presence",
+      "amount": 1
+    },
+    {
+      "cardName": "Enlightened Tutor",
+      "amount": 1
+    },
+    {
+      "cardName": "Erebos, God of the Dead",
+      "amount": 1
+    },
+    {
+      "cardName": "Exploration",
+      "amount": 1
+    },
+    {
+      "cardName": "Forest",
+      "amount": 2
+    },
+    {
+      "cardName": "Fortified Village",
+      "amount": 1
+    },
+    {
+      "cardName": "Frozen Aether",
+      "amount": 1
+    },
+    {
+      "cardName": "Ghostly Prison",
+      "amount": 1
+    },
+    {
+      "cardName": "Go-Shintai of Ancient Wars",
+      "amount": 1
+    },
+    {
+      "cardName": "Go-Shintai of Boundless Vigor",
+      "amount": 1
+    },
+    {
+      "cardName": "Go-Shintai of Hidden Cruelty",
+      "amount": 1
+    },
+    {
+      "cardName": "Go-Shintai of Lost Wisdom",
+      "amount": 1
+    },
+    {
+      "cardName": "Go-Shintai of Shared Purpose",
+      "amount": 1
+    },
+    {
+      "cardName": "Godless Shrine",
+      "amount": 1
+    },
+    {
+      "cardName": "Greater Auramancy",
+      "amount": 1
+    },
+    {
+      "cardName": "Hall of Heliod's Generosity",
+      "amount": 1
+    },
+    {
+      "cardName": "Hallowed Fountain",
+      "amount": 1
+    },
+    {
+      "cardName": "Herald of the Pantheon",
+      "amount": 1
+    },
+    {
+      "cardName": "Honden of Cleansing Fire",
+      "amount": 1
+    },
+    {
+      "cardName": "Honden of Infinite Rage",
+      "amount": 1
+    },
+    {
+      "cardName": "Honden of Life's Web",
+      "amount": 1
+    },
+    {
+      "cardName": "Honden of Night's Reach",
+      "amount": 1
+    },
+    {
+      "cardName": "Idyllic Tutor",
+      "amount": 1
+    },
+    {
+      "cardName": "Island",
+      "amount": 2
+    },
+    {
+      "cardName": "Jukai Naturalist",
+      "amount": 1
+    },
+    {
+      "cardName": "Kodama's Reach",
+      "amount": 1
+    },
+    {
+      "cardName": "Krosan Verge",
+      "amount": 1
+    },
+    {
+      "cardName": "Kruphix, God of Horizons",
+      "amount": 1
+    },
+    {
+      "cardName": "Mana Crypt",
+      "amount": 1
+    },
+    {
+      "cardName": "Mountain",
+      "amount": 1
+    },
+    {
+      "cardName": "Overgrown Farmland",
+      "amount": 1
+    },
+    {
+      "cardName": "Overgrown Tomb",
+      "amount": 1
+    },
+    {
+      "cardName": "Paradox Haze",
+      "amount": 1
+    },
+    {
+      "cardName": "Path of Ancestry",
+      "amount": 1
+    },
+    {
+      "cardName": "Path to Exile",
+      "amount": 1
+    },
+    {
+      "cardName": "Plains",
+      "amount": 2
+    },
+    {
+      "cardName": "Plateau",
+      "amount": 1
+    },
+    {
+      "cardName": "Privileged Position",
+      "amount": 1
+    },
+    {
+      "cardName": "Propaganda",
+      "amount": 1
+    },
+    {
+      "cardName": "Purphoros, God of the Forge",
+      "amount": 1
+    },
+    {
+      "cardName": "Reliquary Tower",
+      "amount": 1
+    },
+    {
+      "cardName": "Replenish",
+      "amount": 1
+    },
+    {
+      "cardName": "Resurgent Belief",
+      "amount": 1
+    },
+    {
+      "cardName": "Rhystic Study",
+      "amount": 1
+    },
+    {
+      "cardName": "Sacred Foundry",
+      "amount": 1
+    },
+    {
+      "cardName": "Sanctum of All",
+      "amount": 1
+    },
+    {
+      "cardName": "Sanctum of Calm Waters",
+      "amount": 1
+    },
+    {
+      "cardName": "Sanctum of Fruitful Harvest",
+      "amount": 1
+    },
+    {
+      "cardName": "Sanctum of Shattered Heights",
+      "amount": 1
+    },
+    {
+      "cardName": "Sanctum of Stone Fangs",
+      "amount": 1
+    },
+    {
+      "cardName": "Sanctum of Tranquil Light",
+      "amount": 1
+    },
+    {
+      "cardName": "Sanctum Weaver",
+      "amount": 1
+    },
+    {
+      "cardName": "Satyr Enchanter",
+      "amount": 1
+    },
+    {
+      "cardName": "Savannah",
+      "amount": 1
+    },
+    {
+      "cardName": "Scrubland",
+      "amount": 1
+    },
+    {
+      "cardName": "Serra's Sanctum",
+      "amount": 1
+    },
+    {
+      "cardName": "Setessan Champion",
+      "amount": 1
+    },
+    {
+      "cardName": "Sol Ring",
+      "amount": 1
+    },
+    {
+      "cardName": "Starfield Mystic",
+      "amount": 1
+    },
+    {
+      "cardName": "Sterling Grove",
+      "amount": 1
+    },
+    {
+      "cardName": "Stomping Ground",
+      "amount": 1
+    },
+    {
+      "cardName": "Sunpetal Grove",
+      "amount": 1
+    },
+    {
+      "cardName": "Swamp",
+      "amount": 2
+    },
+    {
+      "cardName": "Swords to Plowshares",
+      "amount": 1
+    },
+    {
+      "cardName": "Sythis, Harvest's Hand",
+      "amount": 1
+    },
+    {
+      "cardName": "Taiga",
+      "amount": 1
+    },
+    {
+      "cardName": "Temple Garden",
+      "amount": 1
+    },
+    {
+      "cardName": "The World Tree",
+      "amount": 1
+    },
+    {
+      "cardName": "Tropical Island",
+      "amount": 1
+    },
+    {
+      "cardName": "Tundra",
+      "amount": 1
+    },
+    {
+      "cardName": "Verduran Enchantress",
+      "amount": 1
+    },
+    {
+      "cardName": "Weaver of Harmony",
+      "amount": 1
+    },
+    {
+      "cardName": "Yavimaya, Cradle of Growth",
+      "amount": 1
+    }
+  ]
+}

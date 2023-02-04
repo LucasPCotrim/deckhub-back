@@ -6,7 +6,9 @@ const cardsDataset1 = require('./cards1.json');
 const cardsDataset2 = require('./cards2.json');
 const setsDataset = require('./sets.json');
 const formatsDataset = require('./formats.json');
-const sampleDeck = require('./sampleDeck.json');
+const sampleDeck1 = require('./sampleDeck1.json');
+const sampleDeck2 = require('./sampleDeck2.json');
+const sampleDeck3 = require('./sampleDeck3.json');
 
 const prisma = new PrismaClient();
 
@@ -45,7 +47,6 @@ async function createCards(): Promise<void> {
   let count = 0;
   for (const card of cardsDataset1.concat(cardsDataset2)) {
     if (card.layout === 'art_series') continue;
-    if (card.games.indexOf('paper') < 0) continue;
     if (!card.prices.usd) card.prices.usd = 0;
     if (card.border_color === 'silver') continue;
 
@@ -90,27 +91,29 @@ async function createFormats(): Promise<void> {
   console.log(`Added ${count} formats to database`);
 }
 
-async function createDeck(user: users): Promise<void> {
+type cardDataType = { cardName: string; amount: number };
+type deckDataType = { name: string; format: string; cards: cardDataType[] };
+async function createDeck(user: users, deckData: deckDataType): Promise<void> {
   const firstCard = await prisma.cards.findFirst({
     where: {
-      name: sampleDeck.cards[0].cardName,
+      name: deckData.cards[0].cardName,
     },
   });
   const format = await prisma.formats.findFirst({
     where: {
-      name: sampleDeck.format,
+      name: deckData.format,
     },
   });
   const deck = await prisma.decks.create({
     data: {
-      name: sampleDeck.name,
+      name: deckData.name,
       image: firstCard.imageArtCrop,
       formatId: format.id,
       userId: user.id,
     },
   });
   let count = 0;
-  for (const cardInfo of sampleDeck.cards) {
+  for (const cardInfo of deckData.cards) {
     console.log(cardInfo);
     const card = await prisma.cards.findFirst({
       where: {
@@ -143,7 +146,9 @@ async function main() {
   await createSets();
   await createCards();
   await createFormats();
-  await createDeck(user);
+  await createDeck(user, sampleDeck1);
+  await createDeck(user, sampleDeck2);
+  await createDeck(user, sampleDeck3);
 }
 
 main()

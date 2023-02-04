@@ -1,0 +1,82 @@
+{
+  "name": "Grixis Midrange",
+  "format": "standard",
+  "cards": [
+    {
+      "cardName": "Invoke Despair",
+      "amount": 4
+    },
+    {
+      "cardName": "Bloodtithe Harvester",
+      "amount": 4
+    },
+    {
+      "cardName": "Corpse Appraiser",
+      "amount": 4
+    },
+    {
+      "cardName": "Wandering Mind",
+      "amount": 3
+    },
+    {
+      "cardName": "Cut Down",
+      "amount": 3
+    },
+    {
+      "cardName": "Abrade",
+      "amount": 2
+    },
+    {
+      "cardName": "Go for the Throat",
+      "amount": 2
+    },
+    {
+      "cardName": "Infernal Grasp",
+      "amount": 2
+    },
+    {
+      "cardName": "Make Disappear",
+      "amount": 3
+    },
+    {
+      "cardName": "Reckoner Bankbuster",
+      "amount": 3
+    },
+    {
+      "cardName": "The Meathook Massacre",
+      "amount": 4
+    },
+    {
+      "cardName": "Haunted Ridge",
+      "amount": 4
+    },
+    {
+      "cardName": "Shipwreck Marsh",
+      "amount": 4
+    },
+    {
+      "cardName": "Shivan Reef",
+      "amount": 4
+    },
+    {
+      "cardName": "Sulfurous Springs",
+      "amount": 4
+    },
+    {
+      "cardName": "Swamp",
+      "amount": 2
+    },
+    {
+      "cardName": "Takenuma, Abandoned Mire",
+      "amount": 2
+    },
+    {
+      "cardName": "Underground River",
+      "amount": 2
+    },
+    {
+      "cardName": "Xander's Lounge",
+      "amount": 4
+    }
+  ]
+}
