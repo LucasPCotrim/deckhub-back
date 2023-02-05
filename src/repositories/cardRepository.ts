@@ -7,6 +7,8 @@ async function findMany() {
       name: true,
       imageUri: true,
     },
+    skip: 0,
+    take: 50,
   });
 }
 
