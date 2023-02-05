@@ -36,6 +36,7 @@ async function createSets(): Promise<void> {
       iconSvgUri: set.icon_svg_uri,
       setType: set.set_type,
       code: set.code,
+      releasedAt: new Date(set.released_at),
     } as Prisma.setsCreateInput;
     await prisma.sets.create({ data: setToAdd });
     count++;
@@ -49,6 +50,7 @@ async function createCards(): Promise<void> {
     if (card.layout === 'art_series') continue;
     if (!card.prices.usd) card.prices.usd = 0;
     if (card.border_color === 'silver') continue;
+    if (card.set_type === 'token' || card.set_type === 'funny') continue;
 
     const cardSet = await prisma.sets.findFirst({
       where: {

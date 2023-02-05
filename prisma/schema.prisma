@@ -8,26 +8,28 @@ datasource db {
 }
 
 model cards {
-  id            Int          @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   scryfallId    String
-  oracleId      String
   name          String
   typeLine      String
-  rarity        String
   oracleText    String
   manaCost      String
   cmc           Int
   colors        String
   colorIdentity String
-  releasedAt    DateTime     @db.Date
+  releasedAt    DateTime        @db.Date
   scryfallUri   String
   gathererUri   String
   imageUri      String
   imageArtCrop  String
   price         Int
   setId         Int
-  sets          sets         @relation(fields: [setId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  oracleId      String
+  rarity        String
+  sets          sets            @relation(fields: [setId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   cardsDecks    cardsDecks[]
+  commentsCards commentsCards[]
+  likesCards    likesCards[]
 }
 
 model cardsDecks {
@@ -40,17 +42,19 @@ model cardsDecks {
 }
 
 model decks {
-  id         Int          @id @default(autoincrement())
-  name       String
-  image      String
-  formatId   Int
-  userId     Int
-  numVisits  Int          @default(0)
-  createdAt  DateTime     @default(now()) @db.Timestamp(6)
-  updatedAt  DateTime     @default(now()) @db.Timestamp(6)
-  cardsDecks cardsDecks[]
-  formats    formats      @relation(fields: [formatId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "decks_format_id_fkey")
-  users      users        @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "decks_user_id_fkey")
+  id            Int             @id @default(autoincrement())
+  name          String
+  formatId      Int
+  userId        Int
+  createdAt     DateTime        @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime        @default(now()) @db.Timestamp(6)
+  numVisits     Int             @default(0)
+  image         String
+  cardsDecks    cardsDecks[]
+  commentsDecks commentsDecks[]
+  formats       formats         @relation(fields: [formatId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "decks_format_id_fkey")
+  users         users           @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "decks_user_id_fkey")
+  likesDecks    likesDecks[]
 }
 
 model formats {
@@ -75,16 +79,77 @@ model sets {
   iconSvgUri  String
   setType     String
   code        String
+  releasedAt  DateTime @db.Date
   cards       cards[]
 }
 
 model users {
-  id         Int        @id @default(autoincrement())
-  name       String
-  email      String     @unique
-  password   String
-  profilePic String
-  createdAt  DateTime   @default(now()) @db.Timestamp(6)
-  decks      decks[]
-  sessions   sessions[]
+  id                           Int             @id @default(autoincrement())
+  name                         String
+  email                        String          @unique
+  password                     String
+  profilePic                   String
+  createdAt                    DateTime        @default(now()) @db.Timestamp(6)
+  commentsCards                commentsCards[]
+  commentsDecks                commentsDecks[]
+  decks                        decks[]
+  friends_friends_user1Tousers friends[]       @relation("friends_user1Tousers")
+  friends_friends_user2Tousers friends[]       @relation("friends_user2Tousers")
+  likesCards                   likesCards[]
+  likesDecks                   likesDecks[]
+  sessions                     sessions?
+}
+
+model likesDecks {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  deckId    Int
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  decks     decks    @relation(fields: [deckId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model likesCards {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  cardId    Int
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  cards     cards    @relation(fields: [cardId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model commentsCards {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  cardId    Int
+  content   String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  cards     cards    @relation(fields: [cardId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model commentsDecks {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  deckId    Int
+  content   String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  decks     decks    @relation(fields: [deckId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model friends {
+  id                         Int          @id @default(autoincrement())
+  user1                      Int
+  user2                      Int
+  friendStatus               friendStatus
+  createdAt                  DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt                  DateTime     @default(now()) @db.Timestamp(6)
+  users_friends_user1Tousers users        @relation("friends_user1Tousers", fields: [user1], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users_friends_user2Tousers users        @relation("friends_user2Tousers", fields: [user2], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+enum friendStatus {
+  PENDING
+  FRIENDS
 }
