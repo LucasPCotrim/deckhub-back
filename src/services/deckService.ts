@@ -2,11 +2,11 @@ import { deckRepository } from '@/repositories';
 import { decks, cards, sets, users, formats } from '@prisma/client';
 import { deckNotFoundError } from '@/errors';
 
-type deckCover = Omit<decks, 'formatId' | 'userId' | 'createdAt' | 'updatedAt'> & { format: formats } & {
+type DeckCover = Omit<decks, 'formatId' | 'userId' | 'createdAt' | 'updatedAt'> & { format: formats } & {
   user: Omit<users, 'email' | 'password' | 'createdAt'>;
 };
 
-async function getDecks(): Promise<deckCover[]> {
+async function getDecks(): Promise<DeckCover[]> {
   const decks = await deckRepository.findMany();
   return decks.map((deck) => ({
     id: deck.id,
@@ -22,12 +22,12 @@ async function getDecks(): Promise<deckCover[]> {
   }));
 }
 
-type deckInfo = Omit<decks, 'formatId' | 'userId'> & { format: formats } & {
+type DeckInfo = Omit<decks, 'formatId' | 'userId'> & { format: formats } & {
   user: Omit<users, 'email' | 'password' | 'createdAt'>;
-} & { cards: cardInfoType[] };
-type cardInfoType = Omit<cards, 'setId'> & { amount: number; set: sets };
+} & { cards: CardInfoType[] };
+type CardInfoType = Omit<cards, 'setId'> & { amount: number; set: sets };
 
-async function getDeckInfo(id: number): Promise<deckInfo> {
+async function getDeckInfo(id: number): Promise<DeckInfo> {
   const deckInfo = await deckRepository.findById(id);
   if (!deckInfo) throw deckNotFoundError();
 
