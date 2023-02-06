@@ -3,7 +3,7 @@ import httpStatus from 'http-status';
 import { cardService } from '@/services';
 
 export async function getCards(req: Request, res: Response) {
-  const { name } = req.body;
+  const name = req.query.name as string;
   try {
     const cards = await cardService.getCards(name);
     return res.status(httpStatus.OK).send(cards);
