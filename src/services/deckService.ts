@@ -42,6 +42,7 @@ async function getDeckInfo(id: number): Promise<DeckInfo> {
       typeLine: cardInfo.typeLine,
       rarity: cardInfo.rarity,
       oracleText: cardInfo.oracleText,
+      flavorText: cardInfo.flavorText,
       manaCost: cardInfo.manaCost,
       cmc: cardInfo.cmc,
       colors: cardInfo.colors,

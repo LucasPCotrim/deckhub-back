@@ -66,6 +66,7 @@ async function createCards(): Promise<void> {
       typeLine: card.type_line,
       rarity: card.rarity,
       oracleText: card.oracle_text || '',
+      flavorText: card.flavor_text || '',
       manaCost: card.mana_cost || '',
       cmc: card.cmc,
       colors: card.colors ? card.colors.join('') : '',

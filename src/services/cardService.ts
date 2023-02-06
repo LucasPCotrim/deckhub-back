@@ -21,6 +21,7 @@ async function getCardInfo(id: number): Promise<CardInfoType> {
     typeLine: cardInfo.typeLine,
     rarity: cardInfo.rarity,
     oracleText: cardInfo.oracleText,
+    flavorText: cardInfo.flavorText,
     manaCost: cardInfo.manaCost,
     cmc: cardInfo.cmc,
     colors: cardInfo.colors,
