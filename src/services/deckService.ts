@@ -1,6 +1,6 @@
-import { deckRepository } from '@/repositories';
+import { deckRepository, formatRepository, cardRepository, userRepository } from '@/repositories';
 import { decks, cards, sets, users, formats } from '@prisma/client';
-import { deckNotFoundError } from '@/errors';
+import { deckNotFoundError, cardNotFoundError, formatNotFoundError, userNotFoundError } from '@/errors';
 
 type DeckCover = Omit<decks, 'formatId' | 'userId' | 'createdAt' | 'updatedAt'> & { format: formats } & {
   user: Omit<users, 'email' | 'password' | 'createdAt'>;
@@ -74,9 +74,39 @@ async function getDeckInfo(id: number): Promise<DeckInfo> {
   };
 }
 
+type cardSimpleInfo = {
+  id: number;
+  name: string;
+  amount: number;
+};
+type createDeckInputType = {
+  name: string;
+  formatName: string;
+  image: string;
+  cards: cardSimpleInfo[];
+};
+async function createDeck(userId: number, deckInfo: createDeckInputType): Promise<decks> {
+  const user = await userRepository.findById(userId);
+  if (!user) throw userNotFoundError();
+
+  const format = await formatRepository.findByName(deckInfo.formatName);
+  if (!format) throw formatNotFoundError();
+
+  const cards = [];
+  for (const c of deckInfo.cards) {
+    const card = await cardRepository.findById(c.id);
+    if (!card) throw cardNotFoundError();
+
+    cards.push({ ...card, amount: c.amount });
+  }
+  const deck = await deckRepository.createDeck(deckInfo.name, deckInfo.image, user, format, cards);
+  return deck;
+}
+
 const deckService = {
   getDecks,
   getDeckInfo,
+  createDeck,
 };
 
 export { deckService };

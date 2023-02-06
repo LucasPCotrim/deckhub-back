@@ -51,7 +51,14 @@ async function createCards(): Promise<void> {
     if (!card.prices.usd) card.prices.usd = 0;
     if (card.border_color === 'silver') continue;
     if (card.set_type === 'token' || card.set_type === 'funny' || card.set_type === 'memorabilia') continue;
-    if (card.type_line.indexOf('Plane —') >= 0 || card.type_line.indexOf('Token') >= 0) continue;
+    if (
+      card.type_line.indexOf('Plane —') >= 0 ||
+      card.type_line.indexOf('Token') >= 0 ||
+      card.type_line.indexOf('Scheme') >= 0 ||
+      card.type_line.indexOf('Vanguard') >= 0
+    ) {
+      continue;
+    }
 
     const cardSet = await prisma.sets.findFirst({
       where: {

@@ -1,3 +1,4 @@
+import { cards, formats, users } from '.prisma/client';
 import { prisma } from '@/config';
 
 async function findMany(name?: string) {
@@ -41,6 +42,30 @@ async function findById(id: number) {
   });
 }
 
-const deckRepository = { findMany, findById };
+type cardWithAmount = cards & { amount: number };
+async function createDeck(name: string, image: string, user: users, format: formats, cards: cardWithAmount[]) {
+  return prisma.$transaction(async () => {
+    const newDeck = await prisma.decks.create({
+      data: {
+        name,
+        formatId: format.id,
+        userId: user.id,
+        image,
+      },
+    });
+    cards.forEach(async (card) => {
+      await prisma.cardsDecks.create({
+        data: {
+          cardId: card.id,
+          deckId: newDeck.id,
+          amount: card.amount,
+        },
+      });
+    });
+    return newDeck;
+  });
+}
+
+const deckRepository = { findMany, findById, createDeck };
 
 export { deckRepository };
