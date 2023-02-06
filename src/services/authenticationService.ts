@@ -16,7 +16,7 @@ async function signUp({ name, email, password }: SignupParams): Promise<users> {
   return user;
 }
 
-type userSessionInfo = Omit<sessions, 'id' | 'userId' | 'createdAt'> & Omit<users, 'id' | 'password' | 'createdAt'>;
+type userSessionInfo = Omit<sessions, 'id' | 'userId' | 'createdAt'> & Omit<users, 'password'>;
 async function login({ email, password }: LoginParams): Promise<userSessionInfo> {
   const user = await userRepository.findByEmail(email);
 
@@ -27,7 +27,14 @@ async function login({ email, password }: LoginParams): Promise<userSessionInfo>
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
   const session = await sessionRepository.upsert({ userId: user.id, token });
-  return { token: session.token, name: user.name, email: user.email, profilePic: user.profilePic };
+  return {
+    id: user.id,
+    token: session.token,
+    name: user.name,
+    email: user.email,
+    profilePic: user.profilePic,
+    createdAt: user.createdAt,
+  };
 }
 
 async function logout({ userId }: { userId: number }): Promise<void> {
