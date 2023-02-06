@@ -3,8 +3,9 @@ import httpStatus from 'http-status';
 import { cardService } from '@/services';
 
 export async function getCards(req: Request, res: Response) {
+  const { name } = req.body;
   try {
-    const cards = await cardService.getCards();
+    const cards = await cardService.getCards(name);
     return res.status(httpStatus.OK).send(cards);
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(error);

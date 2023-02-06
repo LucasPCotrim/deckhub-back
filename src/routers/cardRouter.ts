@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { validateParams } from '@/middlewares';
-import { cardIdSchema } from '@/schemas/cardIdSchema';
+import { validateParams, validateBody } from '@/middlewares';
+import { cardIdSchema, cardSearchSchema } from '@/schemas/';
 import { getCards, getCardInfo } from '@/controllers/cardController';
 
 const cardRouter = Router();
 
-cardRouter.get('/', getCards);
+cardRouter.get('/', validateBody(cardSearchSchema), getCards);
 cardRouter.get('/:id', validateParams(cardIdSchema), getCardInfo);
 
 export { cardRouter };
