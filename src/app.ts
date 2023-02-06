@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import cors from 'cors';
 import { loadEnv, connectDb, disconnectDB } from '@/config';
-import { authenticationRouter, deckRouter, cardRouter } from './routers';
+import { authenticationRouter, deckRouter, cardRouter, userRouter } from './routers';
 
 loadEnv();
 
@@ -11,7 +11,8 @@ app
   .use(express.json())
   .use('/auth', authenticationRouter)
   .use('/decks', deckRouter)
-  .use('/cards', cardRouter);
+  .use('/cards', cardRouter)
+  .use('/users', userRouter);
 
 export function init(): Promise<Express> {
   connectDb();

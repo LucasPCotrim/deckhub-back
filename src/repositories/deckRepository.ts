@@ -66,6 +66,17 @@ async function createDeck(name: string, image: string, user: users, format: form
   });
 }
 
-const deckRepository = { findMany, findById, createDeck };
+async function findManyByUserId(userId: number) {
+  return prisma.decks.findMany({
+    where: {
+      userId,
+    },
+    include: {
+      formats: true,
+    },
+  });
+}
+
+const deckRepository = { findMany, findById, createDeck, findManyByUserId };
 
 export { deckRepository };
