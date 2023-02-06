@@ -6,10 +6,10 @@ export const createDeckSchema = Joi.object({
     'string.empty': `"name" cannot be an empty field`,
     'any.required': `"name" is a required field`,
   }),
-  formatName: Joi.string().required().messages({
-    'string.base': `"formatName" should be of type 'string'`,
-    'string.empty': `"formatName" cannot be an empty field`,
-    'any.required': `"formatName" is a required field`,
+  format: Joi.string().required().messages({
+    'string.base': `"format" should be of type 'string'`,
+    'string.empty': `"format" cannot be an empty field`,
+    'any.required': `"format" is a required field`,
   }),
   image: Joi.string().required().messages({
     'string.base': `"image" should be of type 'string'`,

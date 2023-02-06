@@ -27,13 +27,18 @@ export async function getDeckInfo(req: Request, res: Response) {
 
 export async function createDeck(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const { name, formatName, image, cards } = req.body;
-  console.log({ name, formatName, image, cards });
+  const { name, format, image, cards } = req.body;
   try {
-    const deckInfo = await deckService.createDeck(userId, { name, formatName, image, cards });
+    const deckInfo = await deckService.createDeck(userId, { name, format, image, cards });
     return res.status(httpStatus.OK).send(deckInfo);
   } catch (error) {
-    console.log(error);
+    if (
+      error.name === 'userNotFoundError' ||
+      error.name === 'cardNotFoundError' ||
+      error.name === 'formatNotFoundError'
+    ) {
+      return res.status(httpStatus.NOT_FOUND).send(error);
+    }
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
 }

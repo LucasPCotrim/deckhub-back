@@ -81,7 +81,7 @@ type cardSimpleInfo = {
 };
 type createDeckInputType = {
   name: string;
-  formatName: string;
+  format: string;
   image: string;
   cards: cardSimpleInfo[];
 };
@@ -89,7 +89,7 @@ async function createDeck(userId: number, deckInfo: createDeckInputType): Promis
   const user = await userRepository.findById(userId);
   if (!user) throw userNotFoundError();
 
-  const format = await formatRepository.findByName(deckInfo.formatName);
+  const format = await formatRepository.findByName(deckInfo.format);
   if (!format) throw formatNotFoundError();
 
   const cards = [];
