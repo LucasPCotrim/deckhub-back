@@ -50,7 +50,8 @@ async function createCards(): Promise<void> {
     if (card.layout === 'art_series') continue;
     if (!card.prices.usd) card.prices.usd = 0;
     if (card.border_color === 'silver') continue;
-    if (card.set_type === 'token' || card.set_type === 'funny') continue;
+    if (card.set_type === 'token' || card.set_type === 'funny' || card.set_type === 'memorabilia') continue;
+    if (card.type_line.indexOf('Plane —') >= 0 || card.type_line.indexOf('Token') >= 0) continue;
 
     const cardSet = await prisma.sets.findFirst({
       where: {
@@ -79,6 +80,11 @@ async function createCards(): Promise<void> {
       price: Math.round(Number(100 * parseFloat(card.prices.usd))),
       sets: { connect: { id: cardSet.id } },
     } as Prisma.cardsCreateInput;
+
+    if (card?.card_faces?.length > 0) {
+      cardToAdd.imageUri = card.card_faces[0].image_uris?.normal || card.image_uris?.normal || '';
+      cardToAdd.imageArtCrop = card.card_faces[0].image_uris?.art_crop || card.image_uris?.art_crop || '';
+    }
     await prisma.cards.create({ data: cardToAdd });
     count++;
   }
@@ -144,6 +150,12 @@ async function main() {
   await prisma.decks.deleteMany({});
   await prisma.users.deleteMany({});
   await prisma.formats.deleteMany({});
+  await prisma.commentsCards.deleteMany({});
+  await prisma.commentsDecks.deleteMany({});
+  await prisma.likesDecks.deleteMany({});
+  await prisma.likesCards.deleteMany({});
+  await prisma.messages.deleteMany({});
+  await prisma.friends.deleteMany({});
 
   const user = await createUser();
   await createSets();

@@ -1,12 +1,22 @@
 import { prisma } from '@/config';
 
-async function findMany() {
+async function findMany(name?: string) {
+  let whereClause = {};
+  if (name) {
+    whereClause = {
+      name: {
+        contains: name,
+        mode: 'insensitive',
+      },
+    };
+  }
   return prisma.cards.findMany({
     select: {
       id: true,
       name: true,
       imageUri: true,
     },
+    where: whereClause,
     skip: 0,
     take: 50,
   });

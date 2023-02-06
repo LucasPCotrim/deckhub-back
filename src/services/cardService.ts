@@ -3,8 +3,8 @@ import { cards, sets } from '@prisma/client';
 import { cardNotFoundError } from '@/errors';
 
 type CardCover = Pick<cards, 'id' | 'name' | 'imageUri'>;
-async function getCards(): Promise<CardCover[]> {
-  const cards = await cardRepository.findMany();
+async function getCards(name?: string): Promise<CardCover[]> {
+  const cards = await cardRepository.findMany(name);
   return cards;
 }
 
