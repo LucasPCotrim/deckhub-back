@@ -5,3 +5,4 @@ export * from './invalidCredentialsError';
 export * from './unauthorizedError';
 export * from './deckNotFoundError';
 export * from './cardNotFoundError';
+export * from './formatNotFoundError';
