@@ -1,11 +1,22 @@
 import { prisma } from '@/config';
 
-async function findMany() {
+async function findMany(name?: string) {
+  let whereClause = {};
+  if (name) {
+    whereClause = {
+      name: {
+        contains: name,
+        mode: 'insensitive',
+      },
+    };
+  }
+
   return prisma.decks.findMany({
     include: {
       formats: true,
       users: true,
     },
+    where: whereClause,
   });
 }
 

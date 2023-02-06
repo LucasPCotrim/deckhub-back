@@ -3,8 +3,10 @@ import httpStatus from 'http-status';
 import { deckService } from '@/services';
 
 export async function getDecks(req: Request, res: Response) {
+  const name = req.query.name as string;
+
   try {
-    const decks = await deckService.getDecks();
+    const decks = await deckService.getDecks(name);
     return res.status(httpStatus.OK).send(decks);
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).send(error);
