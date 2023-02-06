@@ -6,8 +6,8 @@ type DeckCover = Omit<decks, 'formatId' | 'userId' | 'createdAt' | 'updatedAt'> 
   user: Omit<users, 'email' | 'password' | 'createdAt'>;
 };
 
-async function getDecks(): Promise<DeckCover[]> {
-  const decks = await deckRepository.findMany();
+async function getDecks(name?: string): Promise<DeckCover[]> {
+  const decks = await deckRepository.findMany(name);
   return decks.map((deck) => ({
     id: deck.id,
     name: deck.name,
